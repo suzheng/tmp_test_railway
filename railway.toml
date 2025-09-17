@@ -3,10 +3,10 @@ builder = "nixpacks"
 
 [deploy]
 startCommand = "bash start.sh"
-healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "never"
 
 [env]
 PYTHONUNBUFFERED = "1"
 DEBIAN_FRONTEND = "noninteractive"
+NIXPACKS_PYTHON_VERSION = "3.11"
