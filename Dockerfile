@@ -1,6 +1,10 @@
 # Use Python 3.11 base image
 FROM python:3.11-slim
 
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Set working directory
 WORKDIR /app
 
@@ -16,6 +20,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application files
@@ -25,7 +30,7 @@ COPY . .
 RUN chmod +x start.sh
 
 # Expose port (Railway will set PORT env var)
-EXPOSE 8080
+EXPOSE $PORT
 
 # Start the application
 CMD ["bash", "start.sh"]
